@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import {useLocation, useNavigate} from 'react-router-dom';
 
-import {authService} from '../../services/authService';
+import {authService} from '../../services/auth';
 import {useAuthToken} from '../../hooks/useAuthToken';
 
 export const LoginPage = () => {
@@ -38,8 +38,6 @@ export const LoginPage = () => {
           setToken(token);
 
           const origin = location.state?.from?.pathname;
-
-          console.log('origin', origin);
 
           if (origin) {
             navigate(origin);
@@ -70,9 +68,9 @@ export const LoginPage = () => {
           borderRadius: 1,
         }}>
         <Typography component="h1" variant="h5">
-          Sign in
+          Log in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
+        <Box component="form" onSubmit={handleSubmit} sx={{mt: 1}}>
           <TextField
             margin="normal"
             required
@@ -83,18 +81,19 @@ export const LoginPage = () => {
             autoComplete="email"
             autoFocus
             error={hasError}
+            helperText="Use any string"
           />
           <TextField
             margin="normal"
             required
             fullWidth
             name="password"
-            label="Password(use 12345)"
+            label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
             error={hasError}
-            helperText={hasError ? 'Wrong credentials' : ''}
+            helperText={hasError ? 'Wrong credentials' : 'Password is 12345'}
           />
           <Button
             type="submit"
@@ -104,7 +103,7 @@ export const LoginPage = () => {
             {isLoading ? (
               <CircularProgress style={{color: 'white'}} size={24} />
             ) : (
-              'Sign In'
+              'Log In'
             )}
           </Button>
         </Box>

@@ -55,7 +55,7 @@ export const NotificationGenerator = () => {
       }}
       onClose={handleClose}
       anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}>
-      <Alert severity={currentNotification.type} sx={{width: '100%'}}>
+      <Alert severity={currentNotification.type} sx={{maxWidth: 300}}>
         <Notification notification={currentNotification} />
       </Alert>
     </Snackbar>

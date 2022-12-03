@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import Typography from '@mui/material/Typography';
-import {Alert, Stack} from '@mui/material';
+import {Alert, Box, Container, Grid, Stack} from '@mui/material';
 
 import {Notification} from '../../components/notification/notification';
 import {notificationsService} from '../../services/notifications';
@@ -22,27 +22,48 @@ export const DashboardPage = () => {
   }, []);
 
   return (
-    <>
+    <Container maxWidth="lg">
       <Typography variant="h4" component="h1" color="white" gutterBottom>
         Dashboard
       </Typography>
-      <Typography variant="h5" component="h2" color="white" gutterBottom>
-        Current rotation:
-      </Typography>
-      <Stack display="inline-flex" padding={1} spacing={2}>
-        {notificationsList.map((notification, index) => (
-          <Alert
-            key={notification.date}
-            severity={notification.type}
-            onClose={() => removeNotification(index)}>
-            <Notification notification={notification} />
-          </Alert>
-        ))}
-      </Stack>
-      <Typography variant="body1" color="white">
-        Use the form below to create a new notification:
-      </Typography>
-      <AddNotificationForm onSubmit={onAddNewElement} />
-    </>
+      <Grid container>
+        <Grid item xs={12} md={6} sx={{alignItems: 'end'}}>
+          <Typography variant="h5" component="h2" color="white" gutterBottom>
+            Current rotation:
+          </Typography>
+          <Stack
+            sx={{alignItems: 'center'}}
+            display="inline-flex"
+            padding={1}
+            spacing={2}>
+            {notificationsList.map((notification, index) => (
+              <Alert
+                key={notification.date}
+                severity={notification.type}
+                sx={{width: 'fit-content'}}
+                onClose={() => removeNotification(index)}>
+                <Notification notification={notification} />
+              </Alert>
+            ))}
+          </Stack>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box
+            sx={{
+              position: 'sticky',
+              top: 10,
+              display: 'grid',
+              justifyItems: 'center',
+              pb: 2,
+            }}>
+            <Typography variant="h5" component="h2" color="white" gutterBottom>
+              Use the form below to create a new notification:
+            </Typography>
+
+            <AddNotificationForm onSubmit={onAddNewElement} />
+          </Box>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };

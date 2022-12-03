@@ -33,6 +33,7 @@ export const NotificationsProvider: FC<{children: ReactNode}> = ({
 
 export function useNotifications() {
   const context = React.useContext(NotificationsContext);
+
   if (!context) {
     throw new Error(`useCount must be used within a CountProvider`);
   }
@@ -40,6 +41,7 @@ export function useNotifications() {
 
   const add = (payload: Notification) =>
     dispatch({type: ADD_NOTIFICATION, payload});
+
   return {
     notifications,
     dispatch,
